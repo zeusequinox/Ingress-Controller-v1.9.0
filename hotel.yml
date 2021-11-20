@@ -5,7 +5,7 @@ metadata:
 
 ---
 
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hotel-ingress
@@ -16,10 +16,14 @@ spec:
   - host: hotel.example.com 
     http:
       paths:
-      - path: /
+      - pathType: Prefix
+        path: /
         backend:
-          serviceName: hotel-svc
-          servicePort: 80
+          service:
+            name: hotel-svc
+            port:
+              number: 80
+
         
 ---
 
